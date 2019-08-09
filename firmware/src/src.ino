@@ -474,8 +474,12 @@ void dodelay(unsigned int ms)
 // The interrupt routine - runs each time a rising edge of a pulse is detected
 void onPulse()
 {
-  p=1;                                       // flag for new pulse set to true
-  pulseCount++;                              // number of pulses since the last RF sent
+  if (!p) {         // if this is a new pulse
+    pulseCount++;   // increment number of pulses since the last RF sent
+  }
+
+  p=1;              // flag to say this pulse has been counted
+
 }
 
 // Used to test for RFM69CW prescence
